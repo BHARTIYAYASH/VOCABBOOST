@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --feather: #58cc02;
+  --macaw: #1cb0f6;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply font-nunito bg-snow text-eel antialiased;
+  font-weight: 700;
+}
+
+::selection {
+  background: #d7ffb8;
+}
+
+/* ---------- Duolingo-style 3D chunky buttons ---------- */
+.btn3d {
+  @apply font-extrabold uppercase tracking-wide rounded-2xl border-b-4 active:border-b-0 active:translate-y-1 transition-all duration-75 select-none cursor-pointer text-center;
+}
+.btn3d:disabled {
+  @apply opacity-60 cursor-not-allowed active:translate-y-0 active:border-b-4;
+}
+.btn-green {
+  @apply btn3d bg-feather border-featherDark text-snow hover:bg-[#61dd00];
+}
+.btn-blue {
+  @apply btn3d bg-macaw border-macawDark text-snow hover:bg-[#3cbdf9];
+}
+.btn-red {
+  @apply btn3d bg-cardinal border-cardinalDark text-snow hover:bg-[#ff6161];
+}
+.btn-yellow {
+  @apply btn3d bg-bee border-beeDark text-eel hover:bg-[#ffd133];
+}
+.btn-ghost {
+  @apply btn3d bg-snow text-macaw border-2 border-b-4 border-swan hover:bg-polar;
+}
+.btn-ghost:active {
+  @apply translate-y-1 border-b-2;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  @apply bg-snow rounded-2xl border-2 border-swan shadow-card p-5;
+}
+
+/* ---------- Progress bar ---------- */
+.progress-track {
+  @apply h-4 w-full bg-swan rounded-full overflow-hidden;
+}
+.progress-fill {
+  @apply h-full rounded-full relative transition-all duration-500;
+  background: var(--feather);
+}
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: 8px;
+  right: 8px;
+  height: 30%;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+}
+
+/* ---------- Answer option tiles ---------- */
+.option-tile {
+  @apply w-full text-left rounded-2xl border-2 border-b-4 border-swan bg-snow p-4 font-bold cursor-pointer transition-all duration-75 hover:bg-polar;
+}
+.option-tile.selected {
+  @apply border-macaw bg-[#ddf4ff] text-macaw;
+}
+.option-tile.correct {
+  @apply border-mask bg-[#d7ffb8] text-featherDark;
+}
+.option-tile.wrong {
+  @apply border-cardinal bg-[#ffdfe0] text-cardinal;
+}
+
+/* ---------- Animations ---------- */
+@keyframes pop-in {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+@keyframes slide-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up { animation: slide-up 0.3s ease-out both; }
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float-y 3s ease-in-out infinite; }
+
+@keyframes shake-x {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+.animate-shake { animation: shake-x 0.3s ease-in-out; }
+
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.12) rotate(2deg); }
+}
+.animate-flame { animation: flame-flicker 1.2s ease-in-out infinite; display: inline-block; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.7; }
+}
+.confetti-piece {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 16px;
+  border-radius: 3px;
+  animation: confetti-fall linear forwards;
+  z-index: 100;
+}
+
+@keyframes ring-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(88, 204, 2, 0.5); }
+  100% { box-shadow: 0 0 0 18px rgba(88, 204, 2, 0); }
+}
+.animate-ring { animation: ring-pulse 1.6s ease-out infinite; }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: polar; }
+::-webkit-scrollbar-thumb { background: swan; border-radius: 8px; }
